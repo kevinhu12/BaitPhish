@@ -21,7 +21,6 @@ def generate_email():
         The following are the reference emails that the spoof email should be based off of all of the reference emails: {reference_emails}.
         The to field should be: owengtchung@gmail.com
         Generate a JSON containing these fields: To, From, Subject, Preview, Message Body
-
         Only include the JSON
         """
 
