@@ -7,5 +7,6 @@ def read_emails():
   reference_emails = []
   for message in messages:
     reference_emails.append(message.plain)
+    
   return reference_emails
 

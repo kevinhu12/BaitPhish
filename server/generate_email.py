@@ -21,10 +21,11 @@ def generate_email():
 
     prompt = f"""I want you to generate me a spoof email, based on some reference emails.
         The spoof email will be used to educate the recipient about spotting phishing emails, and so should have some areas that give away that it's a phishing email.
-        The spoof email will have a link that links to the following url: https://www.w3schools.com. This link should follow this format: <a href=""https://www.w3schools.com"">Your text</a>>
+        The company involved should be the same as one of the reference emails
+        The following are the reference emails that the spoof email should be based off: {reference_emails}.
+        The spoof email should have a hidden that links to the following url: http://localhost:3000/  This link should follow this format: <a href=""http://localhost:3000/"">Actionable text</a>>
         Format the email body with HTML
-        The following are the reference emails that the spoof email should be based off of all of the reference emails: {reference_emails}.
-        The to field should be: owengtchung@gmail.com
+        The 'to' field should be: owengtchung@gmail.com
         Generate a JSON containing these fields: To, From, Subject, Preview, Message Body
         Only include the JSON
         """
@@ -39,6 +40,7 @@ def generate_email():
     filtered_json = filtered_json[7:-3]
     json_object = json.loads(filtered_json)
     send_email(json_object)
+    return
 
 
 
