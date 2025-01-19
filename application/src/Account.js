@@ -1,45 +1,34 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-const AccountPage = () => {
-  const handleSignOut = () => {
-    alert("Sign out button clicked!");
-    // Add your sign-out logic here
-  };
-
-  const handleDeleteAccount = () => {
-    alert("Delete account button clicked!");
-    // Add your delete account logic here
-  };
-
+const Account = () => {
   return (
     <Box
       sx={{
-        height: "100vh", // Full viewport height
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center", // Center horizontally
-        justifyContent: "flex-start", // Align content at the top
+        justifyContent: "flex-start",
+        alignItems: "center",
         padding: 3,
-        backgroundColor: "#f9f9f9", // Light background color
-        marginTop: 4, // Add some spacing from the top
+        marginTop: 4
       }}
     >
-      {/* Account Information Title */}
+      {/* Header */}
       <Typography variant="h5" component="h2" sx={{ marginBottom: 2 }}>
         Account Information
       </Typography>
 
-      {/* User Info */}
+      {/* Data Fields */}
       <Box
         sx={{
+          width: "100%",
+          maxWidth: "400px",
           display: "flex",
           flexDirection: "column",
-          alignItems: "start", // Align text to the left
-          gap: 1.5, // Spacing between fields
-          marginBottom: 4, // Space between fields and buttons
-          width: "100%",
-          maxWidth: "400px", // Constrain width for better layout
+          alignItems: "start",
+          gap: 1.5,
+          marginBottom: 4
         }}
       >
         <Typography>Name: Owen Chung</Typography>
@@ -47,25 +36,23 @@ const AccountPage = () => {
         <Typography>Test Email Frequency: Weekly</Typography>
       </Box>
 
-      {/* Action Buttons */}
+      {/* Buttons */}
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
-          gap: 2, // Spacing between buttons
+          gap: 2
         }}
       >
         <Button
           variant="contained"
           color="primary"
-          onClick={handleSignOut}
         >
           Sign Out
         </Button>
         <Button
           variant="outlined"
           color="error"
-          onClick={handleDeleteAccount}
         >
           Delete Account
         </Button>
@@ -74,4 +61,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default Account;

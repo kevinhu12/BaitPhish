@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Box, Button, Typography } from "@mui/material";
 
-const HomePage = () => {
+const Home = () => {
   const [loading, setLoading] = useState(false);
 
   const handleTriggerTestEmail = async () => {
-    alert("Trigger test email button clicked!");
-    
     setLoading(true);
     try {
       await axios.get("http://127.0.0.1:5000/api/getGeneratedEmail");
@@ -21,28 +19,24 @@ const HomePage = () => {
   return (
     <Box
       sx={{
-        height: "100vh", // Full height of the viewport
-        backgroundColor: "beige", // Set background color to beige
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center", // Horizontally center the content
-        justifyContent: "center", // Vertically center the content
+        alignItems: "center",
+        justifyContent: "center",
         padding: 2,
+        backgroundColor: "beige"
       }}
     >
-      {/* Title */}
+      {/* Header */}
       <Typography
         variant="h3"
         component="h1"
-        sx={{
-          textAlign: "center", // Center align the title
-          marginBottom: 3, // Add some space below the title
-        }}
+        sx={{ textAlign: "center", marginBottom: 3 }}
       >
-        Welcome to the Home Page
+        Welcome!
       </Typography>
 
-      {/* Button to Trigger Test Email */}
       <Button
         variant="contained"
         color="primary"
@@ -55,4 +49,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
