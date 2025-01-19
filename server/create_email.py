@@ -19,16 +19,17 @@ load_dotenv()
 def generate_email():
     reference_emails = read_emails()
 
-    prompt = f"""I want you to generate me a spoof email, based on some reference emails.
-        The spoof email will be used to educate the recipient about spotting phishing emails, and so should have some areas that give away that it's a phishing email.
-        The company involved should be the same as one of the reference emails
-        The following are the reference emails that the spoof email should be based off: {reference_emails}.
-        The spoof email should have a hidden that links to the following url: http://localhost:3000/  This link should follow this format: <a href=""http://localhost:3000/"">Actionable text</a>>
-        Format the email body with HTML
-        The 'to' field should be: owengtchung@gmail.com
-        Generate a JSON containing these fields: To, From, Subject, Preview, Message Body
-        Only include the JSON
-        """
+    prompt = f"""
+    I want you to generate me a spoof email, based on some reference emails.
+    The spoof email will be used to educate the recipient about spotting phishing emails, and so should have some areas that give away that it's a phishing email.
+    The company involved should be the same as one of the reference emails
+    The following are the reference emails that the spoof email should be based off: {reference_emails}.
+    The spoof email should have a hidden that links to the following url: http://localhost:3000/  This link should follow this format: <a href=""http://localhost:3000/"">Actionable text</a>>
+    Format the email body with HTML
+    The 'to' field should be: owengtchung@gmail.com
+    Generate a JSON containing these fields: To, From, Subject, Preview, Message Body
+    Only include the JSON
+    """
 
     co = cohere.ClientV2(os.getenv("API_KEY"), log_warning_experimental_features=False)
     response = co.chat(
