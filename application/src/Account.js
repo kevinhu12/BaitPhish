@@ -11,7 +11,7 @@ const Account = () => {
         justifyContent: "flex-start",
         alignItems: "center",
         padding: 3,
-        marginTop: 4
+        backgroundColor: "beige"
       }}
     >
       {/* Header */}
