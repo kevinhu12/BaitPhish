@@ -42,8 +42,8 @@ const AccountPage = () => {
           maxWidth: "400px", // Constrain width for better layout
         }}
       >
-        <Typography>Name: John Doe</Typography>
-        <Typography>Email: johndoe@example.com</Typography>
+        <Typography>Name: Owen Chung</Typography>
+        <Typography>Email: owengtchung@gmail.com</Typography>
         <Typography>Test Email Frequency: Weekly</Typography>
       </Box>
 
