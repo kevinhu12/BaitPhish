@@ -12,7 +12,7 @@ CORS(app)
 # Create a route to call the function
 @app.route('/api/getGeneratedEmail', methods=['GET'])
 def generate_email():
-    reference_emails = readEmails()
+    reference_emails = read_emails()
 
     prompt = f"""I want you to generate me a spoof email, based on some reference emails.
         The spoof email will be used to educate the recipient about spotting phishing emails, and so should have some areas that give away that it's a phishing email.
@@ -34,20 +34,19 @@ def generate_email():
     filtered_json = response.message.content[0].text
     filtered_json = filtered_json[7:-3]
     json_object = json.loads(filtered_json)
-    print(json_object)
-    return json_object
+    send_email(json_object)
 
-reference_emails = read_emails()
-send_json = generate_email(reference_emails)
 
-gmail = Gmail()
-params = {
-    "to": send_json['To'],
-    "sender": send_json['From'],
-    "subject": send_json['Subject'],
-    "msg_html": send_json['Message Body'],
-}
-message = gmail.send_message(**params)
+
+def send_email(send_json):
+    gmail = Gmail()
+    params = {
+        "to": send_json['To'],
+        "sender": send_json['From'],
+        "subject": send_json['Subject'],
+        "msg_html": send_json['Message Body'],
+    }
+    message = gmail.send_message(**params)
  
 
 if __name__ == '__main__':
