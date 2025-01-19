@@ -1,9 +1,19 @@
 import cohere
+import json
 from read_emails import *
 from simplegmail import Gmail
 import json
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
-def generate_email(reference_emails):
+app = Flask(__name__)
+CORS(app)
+
+# Create a route to call the function
+@app.route('/api/getGeneratedEmail', methods=['GET'])
+def generate_email():
+    reference_emails = readEmails()
+
     prompt = f"""I want you to generate me a spoof email, based on some reference emails.
         The spoof email will be used to educate the recipient about spotting phishing emails, and so should have some areas that give away that it's a phishing email.
         The spoof email will have a link that links to the following url: https://www.w3schools.com. This link should follow this format: <a href=""https://www.w3schools.com"">Your text</a>>
@@ -38,3 +48,7 @@ params = {
     "msg_html": send_json['Message Body'],
 }
 message = gmail.send_message(**params)
+ 
+
+if __name__ == '__main__':
+    app.run(debug=True)

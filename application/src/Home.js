@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Box, Button, Typography } from "@mui/material";
 
 const HomePage = () => {
-  const handleTriggerTestEmail = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleTriggerTestEmail = async () => {
     alert("Trigger test email button clicked!");
-    // Add logic for triggering the test email here
+    
+    setLoading(true);
+    try {
+      await axios.get("http://127.0.0.1:5000/api/getGeneratedEmail");
+    } catch (error) {
+      console.error("Error generating email:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,6 +50,7 @@ const HomePage = () => {
       >
         Trigger Test Email
       </Button>
+      {loading && <p>Loading...</p>}
     </Box>
   );
 };
