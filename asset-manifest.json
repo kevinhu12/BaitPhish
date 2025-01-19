@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/uofthacks/dummypage/static/css/main.1aea5fff.css",
+    "main.js": "/uofthacks/dummypage/static/js/main.df8d2c2a.js",
+    "static/media/rickroll.gif": "/uofthacks/dummypage/static/media/rickroll.3d11993683d12aaadd54.gif",
+    "index.html": "/uofthacks/dummypage/index.html",
+    "main.1aea5fff.css.map": "/uofthacks/dummypage/static/css/main.1aea5fff.css.map",
+    "main.df8d2c2a.js.map": "/uofthacks/dummypage/static/js/main.df8d2c2a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1aea5fff.css",
+    "static/js/main.df8d2c2a.js"
+  ]
+}
