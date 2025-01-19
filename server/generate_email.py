@@ -3,11 +3,16 @@ import json
 from read_emails import *
 from simplegmail import Gmail
 import json
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_cors import CORS
+
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
+
+load_dotenv()
 
 # Create a route to call the function
 @app.route('/api/getGeneratedEmail', methods=['GET'])
@@ -24,7 +29,7 @@ def generate_email():
         Only include the JSON
         """
 
-    co = cohere.ClientV2("nZZAoqvnpwl4rdBzl2JS3dP0r2ypHdahMDWDPMFz", log_warning_experimental_features=False)
+    co = cohere.ClientV2(os.getenv("API_KEY"), log_warning_experimental_features=False)
     response = co.chat(
         model="command-r-plus", 
         messages=[{"role": "user", "content": prompt}],
