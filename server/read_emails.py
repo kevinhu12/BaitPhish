@@ -1,6 +1,6 @@
 from simplegmail import Gmail
 
-def readEmails():
+def read_emails():
   gmail = Gmail()
   messages = gmail.get_starred_messages()
   
@@ -9,4 +9,3 @@ def readEmails():
     reference_emails.append(message.plain)
   return reference_emails
 
-readEmails()

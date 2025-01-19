@@ -1,34 +1,40 @@
 import cohere
 from read_emails import *
+from simplegmail import Gmail
+import json
 
 def generate_email(reference_emails):
     prompt = f"""I want you to generate me a spoof email, based on some reference emails.
         The spoof email will be used to educate the recipient about spotting phishing emails, and so should have some areas that give away that it's a phishing email.
-        The spoof email will have a link that links to the following url: localhost:3000.
+        The spoof email will have a link that links to the following url: https://www.w3schools.com. This link should follow this format: <a href=""https://www.w3schools.com"">Your text</a>>
+        Format the email body with HTML
         The following are the reference emails that the spoof email should be based off of all of the reference emails: {reference_emails}.
+        The to field should be: owengtchung@gmail.com
         Generate a JSON containing these fields: To, From, Subject, Preview, Message Body
+
+        Only include the JSON
         """
 
     co = cohere.ClientV2("nZZAoqvnpwl4rdBzl2JS3dP0r2ypHdahMDWDPMFz", log_warning_experimental_features=False)
     response = co.chat(
         model="command-r-plus", 
         messages=[{"role": "user", "content": prompt}],
-        response_format={
-            "type": "json_object",
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "To": {"type": "string"},
-                    "From": {"type": "string"},
-                    "Subject": {"type": "string"},
-                    "Preview": {"type": "string"},
-                    "Message Body": {"type": "string"},
-                },
-                "required": ["To", "From", "Subject", "Preview", "Message Body"],
-            },
-        },
     )
-    print(response.message)
+   
+    filtered_json = response.message.content[0].text
+    filtered_json = filtered_json[7:-3]
+    json_object = json.loads(filtered_json)
+    print(json_object)
+    return json_object
 
-reference_emails = readEmails()
-generate_email(reference_emails)
+reference_emails = read_emails()
+send_json = generate_email(reference_emails)
+
+gmail = Gmail()
+params = {
+    "to": send_json['To'],
+    "sender": send_json['From'],
+    "subject": send_json['Subject'],
+    "msg_html": send_json['Message Body'],
+}
+message = gmail.send_message(**params)
